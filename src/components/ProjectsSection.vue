@@ -9,6 +9,27 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: 'Bullfincher',
+    badge: 'webskitters technology',
+    desc: 'Visual-first BI & research platform. I owned the News, Ownership, Earnings Transcript, Org Chart, and SEC Filings (10-K / 10-Q reports) pages. Built AI-powered features to auto-generate earning call transcripts and summarize them along with SEC filings.',
+    stack: ['Laravel', 'Vue.js', 'Highcharts', 'AI/LLM', 'MySQL', 'REST API'],
+    link: 'https://bullfincher.io',
+  },
+  {
+    name: 'MyWhiteCoats',
+    badge: 'webskitters technology',
+    desc: 'HIPAA-compliant healthcare platform. I built e-prescription (ERX) generation via a provider API, doctor/patient onboarding with NPI and state license verification, and Zoom integration for in-app video calls with auto-generated transcripts. All sensitive data encrypted with SHA-256 hashing for HIPAA compliance.',
+    stack: ['Laravel', 'Vue 3', 'Inertia.js', 'Zoom API', 'SHA-256', 'MySQL'],
+    link: 'https://mywhitecoats.com',
+  },
+  {
+    name: 'Merchan.io',
+    badge: 'webreinvent technologies',
+    desc: 'A multi-store Shopify PIM (Product Information Management) and bulk editor. Integrated ag-grid to provide a powerful Excel-like grid view, allowing merchants to easily bulk edit products, variants, tags, and collections with auto-complete and drag-copy support.',
+    stack: ['Laravel', 'Vue.js', 'ag-grid', 'Shopify API', 'MySQL'],
+    link: 'https://merchan.io',
+  },
+  {
     name: 'AR Restaurant Menu',
     badge: 'personal',
     desc: 'QR-based AR menu experience for restaurants. Customers scan a QR code to view 3D food models on their table using browser-based WebXR — no app installation required.',
@@ -22,13 +43,11 @@ const projects: Project[] = [
     stack: ['Laravel', 'Vue 3', 'Pinia', 'Pusher', 'Twilio', 'MySQL'],
     link: 'https://github.com/SumanMCAMR/Ride-Sharing-App-Vue3-Laravel',
   },
-  {
-    name: 'Multi-tenant SaaS Platform',
-    badge: 'production',
-    desc: 'Microservices-based SaaS product with Laravel APIs and a Vue.js frontend, optimized for caching and query performance.',
-    stack: ['Laravel', 'Vue.js', 'Microservices', 'Redis'],
-  },
 ]
+
+function linkLabel(link: string): string {
+  return link.includes('github.com') ? 'View on GitHub ↗' : 'Visit Website ↗'
+}
 </script>
 
 <template>
@@ -39,7 +58,7 @@ const projects: Project[] = [
     </div>
     <span class="eyebrow">Selected Work</span>
     <h2 class="reveal">Projects</h2>
-    <p class="section-sub reveal">Built from real work history — swap in your live demos, repos, and case studies.</p>
+    <p class="section-sub reveal">A mix of professional and personal projects I've built and contributed to.</p>
 
     <div class="proj-grid">
       <component
@@ -59,7 +78,7 @@ const projects: Project[] = [
         <div class="proj-stack">
           <span v-for="tech in project.stack" :key="tech">{{ tech }}</span>
         </div>
-        <span v-if="project.link" class="proj-link">View on GitHub ↗</span>
+        <span v-if="project.link" class="proj-link">{{ linkLabel(project.link) }}</span>
       </component>
     </div>
   </section>

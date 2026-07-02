@@ -1,41 +1,136 @@
 # Repository Guidelines
 
+## Project Overview
+This is **Suman Kumar's** personal developer portfolio — a single-page application built with **Vue 3 + TypeScript + Vite**. The design follows an API/developer-themed aesthetic with a dark color scheme, monospace accents, HTTP method badges, a terminal typing animation, and scroll-reveal effects throughout.
+
+**Live repo:** [github.com/SumanMCAMR/portfolio](https://github.com/SumanMCAMR/portfolio)
+
 ## Project Structure & Module Organization
-This is a Vue 3 + TypeScript portfolio built with Vite. Application entry points live in `src/main.ts` and `src/App.vue`. Page sections are split into single-file components under `src/components/`, such as `HeroSection.vue`, `ProjectsSection.vue`, and `ContactSection.vue`. Shared global styling is in `src/style.css`, with static public assets in `public/` and imported source assets in `src/assets/`. Build and TypeScript configuration lives in `vite.config.ts`, `tsconfig.json`, `tsconfig.app.json`, and `tsconfig.node.json`.
+
+```
+portfolio/
+├── index.html                  # Root HTML with SEO meta tags & Google Fonts preconnect
+├── package.json                # Dependencies: Vue 3, Vite, TypeScript, vue-tsc
+├── vite.config.ts              # Vite config with Vue plugin
+├── tsconfig.json               # TypeScript project references
+├── tsconfig.app.json           # App-level TS config
+├── tsconfig.node.json          # Node-level TS config
+├── AGENTS.md                   # This file — project context for AI agents
+├── .gitignore                  # Node, Vite, TypeScript, macOS, IDE rules
+├── public/                     # Static public assets (favicon, etc.)
+├── src/
+│   ├── main.ts                 # App entry — creates Vue app, imports global CSS
+│   ├── style.css               # Global stylesheet with all CSS custom properties,
+│   │                           # layout, typography, component styles, animations,
+│   │                           # and responsive breakpoints
+│   ├── App.vue                 # Root component — composes all sections,
+│   │                           # implements IntersectionObserver scroll-reveal
+│   ├── assets/                 # Imported source assets
+│   └── components/
+│       ├── NavBar.vue          # Fixed navigation with mobile hamburger toggle
+│       ├── HeroSection.vue     # Hero grid + terminal typing animation
+│       ├── AboutSection.vue    # Profile text + stat cards (3+ yrs, 30%, 25%)
+│       ├── SkillsSection.vue   # Data-driven skill groups in tagged cards
+│       ├── ExperienceSection.vue  # Timeline for work history & education
+│       ├── ProjectsSection.vue # Project cards with links (professional + personal)
+│       ├── CertificationsSection.vue  # LinkedIn Learning certificates and credentials
+│       ├── ContactSection.vue  # CTA box with email, LinkedIn, GitHub
+│       └── FooterSection.vue   # Footer with copyright and dynamic page load time metric
+```
+
+## Component Architecture
+
+### Data Flow
+All section data (skills, projects, experience, certifications, nav items) is defined as **reactive TypeScript arrays/objects** inside each component's `<script setup lang="ts">` block. This makes content edits straightforward — just update the array.
+
+### Key Patterns
+- **Scroll Reveal:** `App.vue` uses a global `IntersectionObserver` (threshold 0.15) that adds `.visible` to any element with class `.reveal`, triggering a CSS opacity/translateY transition.
+- **Terminal Animation:** `HeroSection.vue` uses `onMounted` to type out a curl command character-by-character, then fades in a JSON response block.
+- **Mobile Nav:** `NavBar.vue` uses a `ref<boolean>` to toggle the `.open` class on the nav links list. Links auto-close the menu on click.
+- **Dynamic Project Links:** `ProjectsSection.vue` uses Vue's `<component :is>` to render project cards as `<a>` tags when a link exists, or `<div>` otherwise. A `linkLabel()` helper shows "Visit Website ↗" for live sites and "View on GitHub ↗" for repos.
+- **Interactive Portfolio Pet:** A custom Vue 3 animated mascot (`PortfolioPet.vue`, `PetSpeechBubble.vue`) acts as a guide. It uses a custom state machine (`usePetStateMachine.ts`) to manage sprite states (idle, walking, waving, sleeping, celebrating, talking, typing) and `usePetBehavior.ts` / `usePetMessages.ts` for logic like interactive speech bubbles, scrolling to sections, and downloading resumes.
+- **Performance Monitoring:** `FooterSection.vue` utilizes the browser's `Performance API` (`performance.now()` and navigation timing) on mount to dynamically display the page load time.
+
+### Design System (CSS Custom Properties)
+Defined in `src/style.css` under `:root`:
+- **Colors:** `--bg` (#0B0E14), `--bg-alt` (#11151F), `--bg-raise` (#161B27), `--text` (#E8E6DE), `--text-dim` (#8B93A7), `--accent` (#FF5A3C, orange-red), `--accent-2` (#5EEAD4, teal), `--line` (#232838)
+- **Typography:** `--mono` (JetBrains Mono), `--display` (Space Grotesk), `--body` (Inter)
+- **Spacing:** `--radius` (10px)
+- **Fonts loaded via:** Google Fonts preconnect in `index.html` + `@import` in `style.css`
+
+### Responsive Breakpoints
+- **820px:** Hero grid collapses to single column, about grid collapses, nav switches to mobile dropdown
+- **700px:** Project grid and contact box collapse to single column
+- **600px:** Skill groups collapse to single column
+
+## Portfolio Content
+
+### Owner
+**Suman Kumar** — Software Developer based in Kolkata, India. 3+ years experience with Laravel + Vue.js/Nuxt.
+
+### Projects (in `ProjectsSection.vue`)
+
+| Project | Badge | Description | Link |
+|---------|-------|-------------|------|
+| **Bullfincher** | webskitters technology | Visual-first BI & research platform. Owned News, Ownership, Earnings Transcript, Org Chart, SEC Filings (10-K/10-Q) pages. Built AI-powered earning call transcript generation and summarization. | [bullfincher.io](https://bullfincher.io) |
+| **MyWhiteCoats** | webskitters technology | HIPAA-compliant healthcare platform. Built ERX generation via provider API, doctor/patient onboarding with NPI & state license verification, Zoom integration for in-app video calls with auto-transcripts, SHA-256 encryption for HIPAA compliance. | [mywhitecoats.com](https://mywhitecoats.com) |
+| **Merchan.io** | webreinvent technologies | Multi-store Shopify PIM and bulk editor. Integrated ag-grid for an Excel-like grid view to bulk edit products, variants, collections, and tags with auto-complete and drag-copy features. | [merchan.io](https://merchan.io) |
+| **AR Restaurant Menu** | personal | QR-based AR menu for restaurants using browser WebXR. No app install required. | [GitHub](https://github.com/SumanMCAMR/AR_web_app_restaurant) |
+| **Ride-Sharing App** | personal | Full-stack ride-hailing with real-time tracking, Twilio OTP, Pusher WebSockets. | [GitHub](https://github.com/SumanMCAMR/Ride-Sharing-App-Vue3-Laravel) |
+
+### Experience (in `ExperienceSection.vue`)
+1. **Software Developer** — Webskitters Technology Solutions (Aug 2024 – Present)
+2. **Software Developer** — WebReinvent Technologies (Jun 2023 – Aug 2024)
+3. **MCA** — Manav Rachna International (2021–2023, CGPA 7.8)
+4. **BCA** — B.S.S College, Supaul (2016–2019, 78%)
+
+### Certifications (in `CertificationsSection.vue`)
+- **Project Management Foundations** (LinkedIn Learning)
+
+### Skills (in `SkillsSection.vue`)
+- Languages: PHP, JavaScript (ES6+), TypeScript, HTML5, CSS3, jQuery
+- Frameworks: Laravel, Vue.js, Nuxt 3, React, Next.js
+- Backend: REST APIs, MVC, Sanctum, Passport, Queues & Jobs, Artisan CLI, Eloquent ORM
+- Frontend: SPA Development, Axios, Pinia, Vuex
+- Database: MySQL, PostgreSQL
+- Tools: Git, GitHub, Postman, Composer, Microservices, Caching
+- AI Tools: Antigravity, Claude Code, Codex
+
+### Contact
+- Email: sumankumarmca022@gmail.com
+- Phone: 8709583934
+- LinkedIn: [linkedin.com/in/sumanmca](https://linkedin.com/in/sumanmca)
+- GitHub: [github.com/SumanMCAMR](https://github.com/SumanMCAMR)
 
 ## Build, Test, and Development Commands
-Install dependencies with:
 
 ```sh
+# Install dependencies
 npm install
-```
 
-Run the local development server with:
-
-```sh
+# Run the local development server
 npm run dev
-```
 
-Create a production build with:
-
-```sh
+# Create a production build (runs vue-tsc type check + Vite build)
 npm run build
-```
 
-This runs `vue-tsc -b` for type checking, then builds with Vite. Preview the production output locally with:
-
-```sh
+# Preview the production build locally
 npm run preview
 ```
 
 ## Coding Style & Naming Conventions
-Use Vue single-file components with `<script setup lang="ts">`. Follow the existing style: two-space indentation, single quotes in TypeScript imports and strings, PascalCase component names, and descriptive section component filenames ending in `Section.vue` when they represent page sections. Keep component logic close to the component that owns it, and use `src/style.css` for shared layout, theme variables, and cross-section styles.
+- Use Vue single-file components with `<script setup lang="ts">`.
+- Two-space indentation, single quotes in TypeScript imports and strings.
+- PascalCase component names (e.g., `HeroSection.vue`, `NavBar.vue`).
+- Section components end in `Section.vue` when they represent page sections.
+- Component-scoped styles use `<style scoped>`. Shared styles go in `src/style.css`.
+- Data arrays for content (projects, skills, experience) live inside the component that renders them.
 
 ## Testing Guidelines
 No test runner is currently configured. Before adding behavior-heavy changes, consider adding Vue Test Utils with Vitest and placing tests beside the relevant component or in a dedicated `src/__tests__/` directory. Use names like `HeroSection.test.ts` and focus on user-visible behavior, rendered content, and component state. Until tests exist, always run `npm run build` before submitting changes to catch TypeScript and production build issues.
 
 ## Commit & Pull Request Guidelines
-The current Git history only contains `initial commit`, so there is no established commit convention yet. Use short, imperative commit messages such as `Add contact section animation` or `Update project cards`. Pull requests should include a concise summary, screenshots or screen recordings for visual changes, any linked issue, and the commands run for verification, especially `npm run build`.
+Use short, imperative commit messages such as `Add contact section animation` or `Update project cards`. Pull requests should include a concise summary, screenshots or screen recordings for visual changes, any linked issue, and the commands run for verification, especially `npm run build`.
 
 ## Security & Configuration Tips
 Do not commit secrets, private contact credentials beyond intended public portfolio details, or local environment files. Keep external links using `target="_blank"` paired with `rel="noopener"` as shown in existing components.

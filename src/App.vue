@@ -9,6 +9,7 @@ import ProjectsSection from './components/ProjectsSection.vue'
 import CertificationsSection from './components/CertificationsSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import FooterSection from './components/FooterSection.vue'
+import PortfolioPet from './components/PortfolioPet.vue'
 
 onMounted(() => {
   const revealEls = document.querySelectorAll('.reveal')
@@ -35,4 +36,5 @@ onMounted(() => {
   <CertificationsSection />
   <ContactSection />
   <FooterSection />
+  <PortfolioPet />
 </template>
