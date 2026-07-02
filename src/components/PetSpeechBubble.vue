@@ -14,13 +14,13 @@ const emit = defineEmits<{
 
 <template>
   <aside
-    class="pet-bubble absolute bottom-[calc(100%+10px)] right-0 w-[min(82vw,320px)] rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-alt)] p-[21px] text-left font-sans text-sm text-[color:var(--text)] shadow-2xl"
+    class="pet-bubble absolute bottom-[calc(100%+10px)] right-0 w-[min(82vw,340px)] rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-alt)] text-left font-sans text-sm text-[color:var(--text)] shadow-2xl"
     :class="{ 'motion-off': !animationsEnabled }"
     role="status"
     aria-live="polite"
   >
     <button
-      class="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-md border border-transparent text-[color:var(--text-dim)] transition hover:border-[color:var(--line)] hover:text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-2)]"
+      class="pet-bubble-close"
       type="button"
       aria-label="Close mascot message"
       @click="emit('close')"
@@ -28,9 +28,9 @@ const emit = defineEmits<{
       ×
     </button>
 
-    <p class="pr-10 leading-6">{{ message.text }}</p>
+    <p class="pet-bubble-text">{{ message.text }}</p>
 
-    <div v-if="message.actions?.length" class="mt-3 flex flex-wrap gap-2">
+    <div v-if="message.actions?.length" class="pet-bubble-actions">
       <button
         v-for="action in message.actions"
         :key="action.id"
@@ -46,8 +46,51 @@ const emit = defineEmits<{
 
 <style scoped>
 .pet-bubble {
+  padding: 18px 50px 18px 20px;
   transform-origin: bottom right;
   animation: bubble-pop 180ms ease-out both;
+}
+
+.pet-bubble-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: rgba(22, 27, 39, 0.82);
+  color: var(--text-dim);
+  font-size: 22px;
+  line-height: 1;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.pet-bubble-close:hover,
+.pet-bubble-close:focus {
+  border-color: var(--line);
+  background: var(--bg-raise);
+  color: var(--text);
+  outline: none;
+}
+
+.pet-bubble-close:focus {
+  box-shadow: 0 0 0 2px var(--accent-2);
+}
+
+.pet-bubble-text {
+  max-width: 100%;
+  padding-right: 8px;
+  line-height: 1.55;
+}
+
+.pet-bubble-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .pet-bubble::after {
@@ -65,6 +108,12 @@ const emit = defineEmits<{
 
 .motion-off {
   animation: none;
+}
+
+@media (max-width: 480px) {
+  .pet-bubble {
+    padding: 16px 46px 16px 18px;
+  }
 }
 
 @keyframes bubble-pop {
