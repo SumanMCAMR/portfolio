@@ -16,28 +16,17 @@ const projects: Project[] = [
     link: 'https://github.com/SumanMCAMR/AR_web_app_restaurant',
   },
   {
-    name: 'Project Management System',
-    badge: 'production',
-    desc: 'Role-based PMS with real-time collaboration and multimodule REST API integrations, built for cross-team workflow tracking.',
-    stack: ['Laravel', 'Vue.js', 'MySQL', 'Sanctum'],
+    name: 'Ride-Sharing App',
+    badge: 'personal',
+    desc: 'Full-stack ride-hailing platform with real-time driver tracking, OTP verification via Twilio, WebSocket-based live updates using Pusher, and complete rider/driver workflows.',
+    stack: ['Laravel', 'Vue 3', 'Pinia', 'Pusher', 'Twilio', 'MySQL'],
+    link: 'https://github.com/SumanMCAMR/Ride-Sharing-App-Vue3-Laravel',
   },
   {
     name: 'Multi-tenant SaaS Platform',
     badge: 'production',
     desc: 'Microservices-based SaaS product with Laravel APIs and a Vue.js frontend, optimized for caching and query performance.',
     stack: ['Laravel', 'Vue.js', 'Microservices', 'Redis'],
-  },
-  {
-    name: 'Reusable Component Library',
-    badge: 'internal',
-    desc: 'A set of reusable Vue.js components used across internal products, cutting frontend build time on new features.',
-    stack: ['Vue.js', 'Pinia', 'Axios'],
-  },
-  {
-    name: 'Auth & API Gateway',
-    badge: 'production',
-    desc: 'Authentication system and API endpoints built with Laravel Sanctum/Passport, backing multiple client applications.',
-    stack: ['Laravel', 'Passport', 'REST'],
   },
 ]
 </script>
