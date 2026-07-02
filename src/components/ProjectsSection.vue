@@ -1,5 +1,20 @@
 <script setup lang="ts">
-const projects = [
+interface Project {
+  name: string
+  badge: string
+  desc: string
+  stack: string[]
+  link?: string
+}
+
+const projects: Project[] = [
+  {
+    name: 'AR Restaurant Menu',
+    badge: 'personal',
+    desc: 'QR-based AR menu experience for restaurants. Customers scan a QR code to view 3D food models on their table using browser-based WebXR — no app installation required.',
+    stack: ['Laravel 12', 'Vue 3', 'Inertia.js', 'Tailwind CSS', 'WebXR', 'Three.js'],
+    link: 'https://github.com/SumanMCAMR/AR_web_app_restaurant',
+  },
   {
     name: 'Project Management System',
     badge: 'production',
@@ -38,7 +53,15 @@ const projects = [
     <p class="section-sub reveal">Built from real work history — swap in your live demos, repos, and case studies.</p>
 
     <div class="proj-grid">
-      <div v-for="project in projects" :key="project.name" class="proj-card reveal">
+      <component
+        v-for="project in projects"
+        :key="project.name"
+        :is="project.link ? 'a' : 'div'"
+        :href="project.link"
+        :target="project.link ? '_blank' : undefined"
+        :rel="project.link ? 'noopener' : undefined"
+        class="proj-card reveal"
+      >
         <div class="proj-top">
           <span class="proj-name">{{ project.name }}</span>
           <span class="badge">{{ project.badge }}</span>
@@ -47,13 +70,22 @@ const projects = [
         <div class="proj-stack">
           <span v-for="tech in project.stack" :key="tech">{{ tech }}</span>
         </div>
-      </div>
-
-      <div class="edit-note reveal">
-        <b>Note:</b> These four projects are drafted from your resume's experience section. Replace the names,
-        descriptions, and stacks with your specific projects — and add a link/badge for each once you have live
-        demos or GitHub repos to point to.
-      </div>
+        <span v-if="project.link" class="proj-link">View on GitHub ↗</span>
+      </component>
     </div>
   </section>
 </template>
+
+<style scoped>
+.proj-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-2);
+  transition: color 0.2s ease;
+}
+a.proj-card:hover .proj-link {
+  color: var(--accent);
+}
+</style>
