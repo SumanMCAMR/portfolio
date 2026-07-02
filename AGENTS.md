@@ -83,12 +83,13 @@ Defined in `src/style.css` under `:root`:
 4. **BCA** — B.S.S College, Supaul (2016–2019, 78%)
 
 ### Skills (in `SkillsSection.vue`)
-- Languages: PHP, JavaScript (ES6+), HTML5, CSS3, jQuery
+- Languages: PHP, JavaScript (ES6+), TypeScript, HTML5, CSS3, jQuery
 - Frameworks: Laravel, Vue.js, Nuxt 3, React, Next.js
 - Backend: REST APIs, MVC, Sanctum, Passport, Queues & Jobs, Artisan CLI, Eloquent ORM
 - Frontend: SPA Development, Axios, Pinia, Vuex
 - Database: MySQL, PostgreSQL
 - Tools: Git, GitHub, Postman, Composer, Microservices, Caching
+- AI Tools: Antigravity, Claude Code, Codex
 
 ### Contact
 - Email: sumankumarmca022@gmail.com
