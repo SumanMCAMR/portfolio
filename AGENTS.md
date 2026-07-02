@@ -72,6 +72,7 @@ Defined in `src/style.css` under `:root`:
 |---------|-------|-------------|------|
 | **Bullfincher** | webskitters technology | Visual-first BI & research platform. Owned News, Ownership, Earnings Transcript, Org Chart, SEC Filings (10-K/10-Q) pages. Built AI-powered earning call transcript generation and summarization. | [bullfincher.io](https://bullfincher.io) |
 | **MyWhiteCoats** | webskitters technology | HIPAA-compliant healthcare platform. Built ERX generation via provider API, doctor/patient onboarding with NPI & state license verification, Zoom integration for in-app video calls with auto-transcripts, SHA-256 encryption for HIPAA compliance. | [mywhitecoats.com](https://mywhitecoats.com) |
+| **Merchan.io** | webskitters technology | Advanced web platform for data management. Integrated ag-grid for powerful Excel-like features (sorting, filtering, inline editing, large datasets) directly in the browser. | [merchan.io](https://merchan.io) |
 | **AR Restaurant Menu** | personal | QR-based AR menu for restaurants using browser WebXR. No app install required. | [GitHub](https://github.com/SumanMCAMR/AR_web_app_restaurant) |
 | **Ride-Sharing App** | personal | Full-stack ride-hailing with real-time tracking, Twilio OTP, Pusher WebSockets. | [GitHub](https://github.com/SumanMCAMR/Ride-Sharing-App-Vue3-Laravel) |
 

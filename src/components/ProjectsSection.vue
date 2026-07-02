@@ -23,6 +23,13 @@ const projects: Project[] = [
     link: 'https://mywhitecoats.com',
   },
   {
+    name: 'Merchan.io',
+    badge: 'webskitters technology',
+    desc: 'A comprehensive web platform featuring advanced data management capabilities. Specifically integrated ag-grid to provide powerful Excel-like features such as complex sorting, filtering, inline editing, and large dataset handling directly within the browser.',
+    stack: ['Laravel', 'Vue.js', 'ag-grid', 'MySQL'],
+    link: 'https://merchan.io',
+  },
+  {
     name: 'AR Restaurant Menu',
     badge: 'personal',
     desc: 'QR-based AR menu experience for restaurants. Customers scan a QR code to view 3D food models on their table using browser-based WebXR — no app installation required.',
