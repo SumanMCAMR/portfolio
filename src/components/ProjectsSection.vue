@@ -9,6 +9,20 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: 'Bullfincher',
+    badge: 'webskitters technology',
+    desc: 'A visual-first business intelligence, data and research platform. Features dynamic charts, company financials, stock screeners, earnings calendars, and SEC filings — making corporate storytelling easier through interactive visuals.',
+    stack: ['Laravel', 'Vue.js', 'Highcharts', 'MySQL', 'jQuery', 'REST API'],
+    link: 'https://bullfincher.io',
+  },
+  {
+    name: 'MyWhiteCoats',
+    badge: 'webskitters technology',
+    desc: 'Healthcare platform connecting patients with doctors. Features OTP-based authentication, appointment booking, real-time messaging, e-prescriptions, pharmacy locator, and a full admin dashboard.',
+    stack: ['Laravel', 'Vue 3', 'Inertia.js', 'Tailwind CSS', 'MySQL', 'Bootstrap'],
+    link: 'https://mywhitecoats.com',
+  },
+  {
     name: 'AR Restaurant Menu',
     badge: 'personal',
     desc: 'QR-based AR menu experience for restaurants. Customers scan a QR code to view 3D food models on their table using browser-based WebXR — no app installation required.',
@@ -22,13 +36,11 @@ const projects: Project[] = [
     stack: ['Laravel', 'Vue 3', 'Pinia', 'Pusher', 'Twilio', 'MySQL'],
     link: 'https://github.com/SumanMCAMR/Ride-Sharing-App-Vue3-Laravel',
   },
-  {
-    name: 'Multi-tenant SaaS Platform',
-    badge: 'production',
-    desc: 'Microservices-based SaaS product with Laravel APIs and a Vue.js frontend, optimized for caching and query performance.',
-    stack: ['Laravel', 'Vue.js', 'Microservices', 'Redis'],
-  },
 ]
+
+function linkLabel(link: string): string {
+  return link.includes('github.com') ? 'View on GitHub ↗' : 'Visit Website ↗'
+}
 </script>
 
 <template>
@@ -39,7 +51,7 @@ const projects: Project[] = [
     </div>
     <span class="eyebrow">Selected Work</span>
     <h2 class="reveal">Projects</h2>
-    <p class="section-sub reveal">Built from real work history — swap in your live demos, repos, and case studies.</p>
+    <p class="section-sub reveal">A mix of professional and personal projects I've built and contributed to.</p>
 
     <div class="proj-grid">
       <component
@@ -59,7 +71,7 @@ const projects: Project[] = [
         <div class="proj-stack">
           <span v-for="tech in project.stack" :key="tech">{{ tech }}</span>
         </div>
-        <span v-if="project.link" class="proj-link">View on GitHub ↗</span>
+        <span v-if="project.link" class="proj-link">{{ linkLabel(project.link) }}</span>
       </component>
     </div>
   </section>
