@@ -35,7 +35,7 @@ portfolio/
 │       ├── ProjectsSection.vue # Project cards with links (professional + personal)
 │       ├── CertificationsSection.vue  # LinkedIn Learning certificates and credentials
 │       ├── ContactSection.vue  # CTA box with email, LinkedIn, GitHub
-│       └── FooterSection.vue   # Simple footer with copyright
+│       └── FooterSection.vue   # Footer with copyright and dynamic page load time metric
 ```
 
 ## Component Architecture
@@ -48,6 +48,7 @@ All section data (skills, projects, experience, certifications, nav items) is de
 - **Terminal Animation:** `HeroSection.vue` uses `onMounted` to type out a curl command character-by-character, then fades in a JSON response block.
 - **Mobile Nav:** `NavBar.vue` uses a `ref<boolean>` to toggle the `.open` class on the nav links list. Links auto-close the menu on click.
 - **Dynamic Project Links:** `ProjectsSection.vue` uses Vue's `<component :is>` to render project cards as `<a>` tags when a link exists, or `<div>` otherwise. A `linkLabel()` helper shows "Visit Website ↗" for live sites and "View on GitHub ↗" for repos.
+- **Performance Monitoring:** `FooterSection.vue` utilizes the browser's `Performance API` (`performance.now()` and navigation timing) on mount to dynamically display the page load time.
 
 ### Design System (CSS Custom Properties)
 Defined in `src/style.css` under `:root`:
@@ -81,6 +82,9 @@ Defined in `src/style.css` under `:root`:
 2. **Software Developer** — WebReinvent Technologies (Jun 2023 – Aug 2024)
 3. **MCA** — Manav Rachna International (2021–2023, CGPA 7.8)
 4. **BCA** — B.S.S College, Supaul (2016–2019, 78%)
+
+### Certifications (in `CertificationsSection.vue`)
+- **Project Management Foundations** (LinkedIn Learning)
 
 ### Skills (in `SkillsSection.vue`)
 - Languages: PHP, JavaScript (ES6+), TypeScript, HTML5, CSS3, jQuery
