@@ -18,8 +18,8 @@ const projects: Project[] = [
   {
     name: 'MyWhiteCoats',
     badge: 'webskitters technology',
-    desc: 'Healthcare platform connecting patients with doctors. Features OTP-based authentication, appointment booking, real-time messaging, e-prescriptions, pharmacy locator, and a full admin dashboard.',
-    stack: ['Laravel', 'Vue 3', 'Inertia.js', 'Tailwind CSS', 'MySQL', 'Bootstrap'],
+    desc: 'HIPAA-compliant healthcare platform. I built e-prescription (ERX) generation via a provider API, doctor/patient onboarding with NPI and state license verification, and Zoom integration for in-app video calls with auto-generated transcripts. All sensitive data encrypted with SHA-256 hashing for HIPAA compliance.',
+    stack: ['Laravel', 'Vue 3', 'Inertia.js', 'Zoom API', 'SHA-256', 'MySQL'],
     link: 'https://mywhitecoats.com',
   },
   {
