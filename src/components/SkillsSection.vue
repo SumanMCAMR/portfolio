@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const skillGroups = [
   { key: '"languages"', tags: ['PHP', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'jQuery'] },
-  { key: '"frameworks"', tags: ['Laravel', 'Vue.js', 'Nuxt 3'] },
+  { key: '"frameworks"', tags: ['Laravel', 'Vue.js', 'Nuxt 3', 'React', 'Next.js'] },
   { key: '"backend"', tags: ['REST APIs', 'MVC', 'Sanctum', 'Passport', 'Queues & Jobs', 'Artisan CLI', 'Eloquent ORM'] },
   { key: '"frontend"', tags: ['SPA Development', 'Axios', 'Pinia', 'Vuex'] },
   { key: '"database"', tags: ['MySQL', 'PostgreSQL'] },

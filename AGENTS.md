@@ -84,7 +84,7 @@ Defined in `src/style.css` under `:root`:
 
 ### Skills (in `SkillsSection.vue`)
 - Languages: PHP, JavaScript (ES6+), HTML5, CSS3, jQuery
-- Frameworks: Laravel, Vue.js, Nuxt 3
+- Frameworks: Laravel, Vue.js, Nuxt 3, React, Next.js
 - Backend: REST APIs, MVC, Sanctum, Passport, Queues & Jobs, Artisan CLI, Eloquent ORM
 - Frontend: SPA Development, Axios, Pinia, Vuex
 - Database: MySQL, PostgreSQL
