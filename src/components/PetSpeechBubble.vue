@@ -14,13 +14,13 @@ const emit = defineEmits<{
 
 <template>
   <aside
-    class="pet-bubble absolute bottom-[calc(100%+10px)] right-0 w-[min(82vw,320px)] rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-alt)] p-4 text-left font-sans text-sm text-[color:var(--text)] shadow-2xl"
+    class="pet-bubble absolute bottom-[calc(100%+10px)] right-0 w-[min(82vw,320px)] rounded-lg border border-[color:var(--line)] bg-[color:var(--bg-alt)] p-[21px] text-left font-sans text-sm text-[color:var(--text)] shadow-2xl"
     :class="{ 'motion-off': !animationsEnabled }"
     role="status"
     aria-live="polite"
   >
     <button
-      class="absolute right-2 top-2 grid h-7 w-7 place-items-center rounded-md border border-transparent text-[color:var(--text-dim)] transition hover:border-[color:var(--line)] hover:text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-2)]"
+      class="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-md border border-transparent text-[color:var(--text-dim)] transition hover:border-[color:var(--line)] hover:text-[color:var(--text)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent-2)]"
       type="button"
       aria-label="Close mascot message"
       @click="emit('close')"
@@ -28,7 +28,7 @@ const emit = defineEmits<{
       ×
     </button>
 
-    <p class="pr-8 leading-6">{{ message.text }}</p>
+    <p class="pr-10 leading-6">{{ message.text }}</p>
 
     <div v-if="message.actions?.length" class="mt-3 flex flex-wrap gap-2">
       <button
