@@ -11,8 +11,8 @@ const projects: Project[] = [
   {
     name: 'Bullfincher',
     badge: 'webskitters technology',
-    desc: 'A visual-first business intelligence, data and research platform. Features dynamic charts, company financials, stock screeners, earnings calendars, and SEC filings — making corporate storytelling easier through interactive visuals.',
-    stack: ['Laravel', 'Vue.js', 'Highcharts', 'MySQL', 'jQuery', 'REST API'],
+    desc: 'Visual-first BI & research platform. I owned the News, Ownership, Earnings Transcript, Org Chart, and SEC Filings (10-K / 10-Q reports) pages. Built AI-powered features to auto-generate earning call transcripts and summarize them along with SEC filings.',
+    stack: ['Laravel', 'Vue.js', 'Highcharts', 'AI/LLM', 'MySQL', 'REST API'],
     link: 'https://bullfincher.io',
   },
   {
