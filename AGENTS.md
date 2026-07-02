@@ -33,7 +33,7 @@ portfolio/
 │       ├── SkillsSection.vue   # Data-driven skill groups in tagged cards
 │       ├── ExperienceSection.vue  # Timeline for work history & education
 │       ├── ProjectsSection.vue # Project cards with links (professional + personal)
-│       ├── CertificationsSection.vue  # Placeholder certification entries
+│       ├── CertificationsSection.vue  # LinkedIn Learning certificates and credentials
 │       ├── ContactSection.vue  # CTA box with email, LinkedIn, GitHub
 │       └── FooterSection.vue   # Simple footer with copyright
 ```
