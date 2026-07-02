@@ -48,6 +48,7 @@ All section data (skills, projects, experience, certifications, nav items) is de
 - **Terminal Animation:** `HeroSection.vue` uses `onMounted` to type out a curl command character-by-character, then fades in a JSON response block.
 - **Mobile Nav:** `NavBar.vue` uses a `ref<boolean>` to toggle the `.open` class on the nav links list. Links auto-close the menu on click.
 - **Dynamic Project Links:** `ProjectsSection.vue` uses Vue's `<component :is>` to render project cards as `<a>` tags when a link exists, or `<div>` otherwise. A `linkLabel()` helper shows "Visit Website ↗" for live sites and "View on GitHub ↗" for repos.
+- **Interactive Portfolio Pet:** A custom Vue 3 animated mascot (`PortfolioPet.vue`, `PetSpeechBubble.vue`) acts as a guide. It uses a custom state machine (`usePetStateMachine.ts`) to manage sprite states (idle, walking, waving, sleeping, celebrating, talking, typing) and `usePetBehavior.ts` / `usePetMessages.ts` for logic like interactive speech bubbles, scrolling to sections, and downloading resumes.
 - **Performance Monitoring:** `FooterSection.vue` utilizes the browser's `Performance API` (`performance.now()` and navigation timing) on mount to dynamically display the page load time.
 
 ### Design System (CSS Custom Properties)
