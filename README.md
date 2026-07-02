@@ -2,7 +2,7 @@
 
 A modern, interactive developer portfolio built with **Vue 3 + TypeScript + Vite**. Features an API/developer-themed design with a dark color scheme, terminal animations, scroll-reveal effects, and an interactive animated mascot.
 
-**Live Site:** [sumankumarmca.netlify.app](https://sumankumarsde.netlify.app)  
+**Live Site:** [sumankumarsde.netlify.app](https://sumankumarsde.netlify.app)  
 **Repository:** [github.com/SumanMCAMR/portfolio](https://github.com/SumanMCAMR/portfolio)
 
 ---
