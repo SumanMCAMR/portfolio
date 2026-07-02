@@ -24,9 +24,9 @@ const projects: Project[] = [
   },
   {
     name: 'Merchan.io',
-    badge: 'webskitters technology',
-    desc: 'A comprehensive web platform featuring advanced data management capabilities. Specifically integrated ag-grid to provide powerful Excel-like features such as complex sorting, filtering, inline editing, and large dataset handling directly within the browser.',
-    stack: ['Laravel', 'Vue.js', 'ag-grid', 'MySQL'],
+    badge: 'webreinvent technologies',
+    desc: 'A multi-store Shopify PIM (Product Information Management) and bulk editor. Integrated ag-grid to provide a powerful Excel-like grid view, allowing merchants to easily bulk edit products, variants, tags, and collections with auto-complete and drag-copy support.',
+    stack: ['Laravel', 'Vue.js', 'ag-grid', 'Shopify API', 'MySQL'],
     link: 'https://merchan.io',
   },
   {
