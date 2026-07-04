@@ -55,7 +55,7 @@ function runConfetti() {
 }
 
 async function downloadResume(target?: string) {
-  const resumePath = target ?? '/Suman_Kumar_Laravel_Resume.pdf'
+  const resumePath = target ?? '/Suman_Kumar_Resume.pdf'
 
   try {
     const response = await fetch(resumePath, { method: 'HEAD' })

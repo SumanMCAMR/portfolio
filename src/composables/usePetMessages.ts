@@ -8,7 +8,7 @@ const guideActions = [
     id: 'download-resume',
     label: 'Download Resume',
     kind: 'download' as const,
-    target: '/Suman_Kumar_Laravel_Resume.pdf',
+    target: '/Suman_Kumar_Resume.pdf',
   },
   { id: 'contact-me', label: 'Contact Me', kind: 'scroll' as const, target: '#contact' },
 ]
