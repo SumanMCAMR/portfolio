@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+
 interface Project {
   name: string
   badge: string
@@ -6,6 +8,9 @@ interface Project {
   stack: string[]
   link?: string
 }
+
+const projectGrid = ref<HTMLElement | null>(null)
+let cardObserver: IntersectionObserver | undefined
 
 const projects: Project[] = [
   {
@@ -48,6 +53,21 @@ const projects: Project[] = [
 function linkLabel(link: string): string {
   return link.includes('github.com') ? 'View on GitHub ↗' : 'Visit Website ↗'
 }
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  cardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => entry.target.classList.toggle('in-view', entry.isIntersecting))
+    },
+    { threshold: 0.28 },
+  )
+
+  projectGrid.value?.querySelectorAll('.proj-card').forEach((card) => cardObserver?.observe(card))
+})
+
+onBeforeUnmount(() => cardObserver?.disconnect())
 </script>
 
 <template>
@@ -60,15 +80,16 @@ function linkLabel(link: string): string {
     <h2 class="reveal">Projects</h2>
     <p class="section-sub reveal">A mix of professional and personal projects I've built and contributed to.</p>
 
-    <div class="proj-grid">
+    <div ref="projectGrid" class="proj-grid">
       <component
-        v-for="project in projects"
+        v-for="(project, index) in projects"
         :key="project.name"
         :is="project.link ? 'a' : 'div'"
         :href="project.link"
         :target="project.link ? '_blank' : undefined"
         :rel="project.link ? 'noopener' : undefined"
         class="proj-card reveal"
+        :style="{ '--reveal-order': index % 2, '--glow-delay': `${index * -480}ms` }"
       >
         <div class="proj-top">
           <span class="proj-name">{{ project.name }}</span>

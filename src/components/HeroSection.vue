@@ -1,51 +1,86 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
-const terminalBody = ref<HTMLElement | null>(null)
+const command = '$ curl -s api.sumankumar.dev/v1/profile'
+const typedCommand = ref('')
+const typedResponse = ref('')
+const responseStarted = ref(false)
+const responseComplete = ref(false)
+let typingTimer: ReturnType<typeof window.setTimeout> | undefined
+let stopped = false
 
-const jsonHtml = `{
-  <span class="json-key">"name"</span>: <span class="json-str">"Suman Kumar"</span>,
-  <span class="json-key">"role"</span>: <span class="json-str">"Software Developer"</span>,
-  <span class="json-key">"stack"</span>: [<span class="json-str">"Laravel"</span>, <span class="json-str">"Vue.js"</span>, <span class="json-str">"Nuxt 3"</span>],
-  <span class="json-key">"experience_years"</span>: 3,
-  <span class="json-key">"location"</span>: <span class="json-str">"Kolkata, India"</span>,
-  <span class="json-key">"status"</span>: <span class="json-str">"available_for_hire"</span>
+const jsonText = `{
+  "name": "Suman Kumar",
+  "role": "Software Developer",
+  "stack": ["Laravel", "Vue.js", "Nuxt 3"],
+  "experience_years": 3,
+  "location": "Kolkata, India",
+  "status": "available_for_hire"
 }`
 
-async function typeTerminal() {
-  const body = terminalBody.value
-  if (!body) return
+function highlightJson(value: string) {
+  const escaped = value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
 
-  const cmdEl = document.createElement('div')
-  cmdEl.className = 'cmd'
-  body.appendChild(cmdEl)
-
-  const cmdText = '$ curl -s api.sumankumar.dev/v1/profile'
-  for (let i = 0; i <= cmdText.length; i++) {
-    cmdEl.innerHTML = cmdText.slice(0, i) + '<span class="cursor"></span>'
-    await new Promise(r => setTimeout(r, 18))
-  }
-  cmdEl.innerHTML = cmdText
-  await new Promise(r => setTimeout(r, 300))
-
-  const pre = document.createElement('pre')
-  pre.style.marginTop = '14px'
-  body.appendChild(pre)
-  pre.innerHTML = jsonHtml
-  pre.style.opacity = '0'
-  pre.style.transition = 'opacity 0.5s ease'
-  requestAnimationFrame(() => (pre.style.opacity = '1'))
+  return escaped.replace(
+    /("(?:\\.|[^"\\])*")(?=\s*:)|("(?:\\.|[^"\\])*")|(\b\d+\b)/g,
+    (match, key: string | undefined, jsonValue: string | undefined) => {
+      if (key) return `<span class="json-key">${match}</span>`
+      if (jsonValue) return `<span class="json-str">${match}</span>`
+      return `<span class="json-num">${match}</span>`
+    },
+  )
 }
 
-onMounted(() => {
-  typeTerminal()
+const highlightedResponse = computed(() => highlightJson(typedResponse.value))
+
+function wait(duration: number) {
+  return new Promise<void>((resolve) => {
+    typingTimer = window.setTimeout(resolve, duration)
+  })
+}
+
+async function typeTerminal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    typedCommand.value = command
+    typedResponse.value = jsonText
+    responseStarted.value = true
+    responseComplete.value = true
+    return
+  }
+
+  for (let index = 1; index <= command.length; index++) {
+    if (stopped) return
+    typedCommand.value = command.slice(0, index)
+    await wait(12)
+  }
+
+  await wait(120)
+  responseStarted.value = true
+
+  for (let index = 1; index <= jsonText.length; index++) {
+    if (stopped) return
+    typedResponse.value = jsonText.slice(0, index)
+    await wait(4)
+  }
+
+  responseComplete.value = true
+}
+
+onMounted(() => void typeTerminal())
+
+onBeforeUnmount(() => {
+  stopped = true
+  if (typingTimer) window.clearTimeout(typingTimer)
 })
 </script>
 
 <template>
   <section id="hero">
     <div class="hero-grid">
-      <div class="reveal visible">
+      <div class="hero-copy hero-enter">
         <div class="hero-kicker">status: open to opportunities</div>
         <h1 class="hero-name">Suman<br>Kumar</h1>
         <div class="hero-role">
@@ -71,12 +106,17 @@ onMounted(() => {
         </div>
       </div>
 
-      <div class="terminal reveal visible">
+      <div class="terminal hero-enter terminal-enter">
         <div class="terminal-bar">
           <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
           <span class="terminal-title">GET /suman-kumar HTTP/1.1</span>
         </div>
-        <div class="terminal-body" ref="terminalBody"></div>
+        <div class="terminal-body">
+          <div class="cmd">
+            {{ typedCommand }}<span v-if="!responseStarted" class="cursor"></span>
+          </div>
+          <pre v-show="responseStarted" class="terminal-response"><code v-html="highlightedResponse"></code><span v-if="!responseComplete" class="cursor"></span></pre>
+        </div>
       </div>
     </div>
   </section>

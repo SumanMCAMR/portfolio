@@ -53,8 +53,13 @@ const items: TimelineItem[] = [
     <h2 class="reveal">Experience</h2>
     <p class="section-sub reveal">Two roles, one continuous thread: Laravel backends, Vue/Nuxt frontends.</p>
 
-    <div class="timeline">
-      <div v-for="(item, idx) in items" :key="idx" class="tl-item reveal">
+    <div class="timeline reveal reveal-path">
+      <div
+        v-for="(item, idx) in items"
+        :key="idx"
+        class="tl-item reveal"
+        :style="{ '--reveal-order': idx }"
+      >
         <div class="tl-head">
           <span class="tl-role">{{ item.role }}</span>
           <span class="tl-date">{{ item.date }}</span>

@@ -21,7 +21,12 @@ const skillGroups = [
     <p class="section-sub reveal">The languages, frameworks, and tools I use to build and ship.</p>
 
     <div class="skill-groups">
-      <div v-for="group in skillGroups" :key="group.key" class="skill-card reveal">
+      <div
+        v-for="(group, index) in skillGroups"
+        :key="group.key"
+        class="skill-card reveal"
+        :style="{ '--reveal-order': index % 2 }"
+      >
         <span class="key">{{ group.key }}</span>
         <div class="tag-row">
           <span v-for="tag in group.tags" :key="tag" class="tag">{{ tag }}</span>

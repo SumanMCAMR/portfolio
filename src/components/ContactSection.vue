@@ -8,7 +8,7 @@
     <h2 class="reveal">Get In Touch</h2>
     <p class="section-sub reveal">Open to new roles and collaborations.</p>
 
-    <div class="contact-box reveal">
+    <div class="contact-box reveal" style="--reveal-order: 2">
       <div>
         <h3>Let's build something reliable.</h3>
         <p>sumankumarmca022@gmail.com · Kolkata, India</p>

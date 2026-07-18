@@ -33,7 +33,6 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
   let walkTimer: ReturnType<typeof window.setTimeout> | undefined
   let scrollTimer: ReturnType<typeof window.setTimeout> | undefined
   let messageTimer: ReturnType<typeof window.setTimeout> | undefined
-  let lastScrollY = 0
   let lastSection = ''
   let motionQuery: MediaQueryList | undefined
   let sectionObserver: IntersectionObserver | undefined
@@ -42,13 +41,9 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
     prefersReducedMotion.value = event.matches
   }
 
-  function clampPosition(nextRight: number) {
-    const bubbleWidth = Math.min(window.innerWidth * 0.82, 320)
-    const bubbleSafeRight = Math.max(12, window.innerWidth - bubbleWidth - 12)
-    const maxTravelRight = window.innerWidth < 640 ? 48 : 220
-    const maxRight = Math.max(12, Math.min(maxTravelRight, bubbleSafeRight))
+  function setFixedPosition() {
     position.value = {
-      right: Math.min(Math.max(12, nextRight), maxRight),
+      right: window.innerWidth < 640 ? 12 : 24,
       bottom: window.innerWidth < 640 ? 12 : 22,
     }
   }
@@ -78,8 +73,6 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
     const delay = 15000 + Math.random() * 15000
     walkTimer = window.setTimeout(() => {
       if (visible.value && effectiveAnimationsEnabled.value && !asleep.value) {
-        const delta = Math.round((Math.random() - 0.5) * 180)
-        clampPosition(position.value.right + delta)
         handlers.transitionTo('walking', { durationMs: 1300 })
       }
       scheduleWalk()
@@ -104,18 +97,12 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
   function handleScroll() {
     resetInactivity()
     if (!visible.value || asleep.value) return
+    if (scrollTimer) return
 
-    const currentY = window.scrollY
-    const scrollingDown = currentY > lastScrollY
-    lastScrollY = currentY
-    clampPosition(scrollingDown ? 24 : 96)
     handlers.transitionTo('walking', { durationMs: 800 })
-
-    if (!scrollTimer) {
-      scrollTimer = window.setTimeout(() => {
-        scrollTimer = undefined
-      }, 1200)
-    }
+    scrollTimer = window.setTimeout(() => {
+      scrollTimer = undefined
+    }, 1200)
   }
 
   function scheduleMessageRotation() {
@@ -131,7 +118,7 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
   }
 
   function handleResize() {
-    clampPosition(position.value.right)
+    setFixedPosition()
   }
 
   function setupSectionObserver() {
@@ -175,8 +162,7 @@ export function usePetBehavior(handlers: BehaviorHandlers) {
     window.addEventListener('resize', handleResize, { passive: true })
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    lastScrollY = window.scrollY
-    clampPosition(position.value.right)
+    setFixedPosition()
     resetInactivity()
     scheduleWalk()
     scheduleMessageRotation()
